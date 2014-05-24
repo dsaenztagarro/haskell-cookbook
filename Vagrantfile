@@ -11,7 +11,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = "haskell_vm"
+  config.vm.hostname = "haskell-vm"
+
+  # Previous steps:
+  # 1. Identities list of agent ssh forwarding
+  #   sh-add -L
+  # 2. To add identities to agent
+  #   ssh-add ~/.ssh/id_rsa
+  # 3. Add your public key (~/.ssh/id_rsa.pub) to ~/.ssh/authorized_keys on the
+  #   Vagrant VM. Also remove insecure vagrant key.
+  # 4. Add your known hosts (~/.ssh/known_hosts) to "vagrant" and "root" user on
+  #   Vagrant VM. Add file to "root" user is mandatory due to the fact that
+  #   recipes are execute as sudo, not as the vagrant user!!
+
+  # Uncommented after adding ssh keys to this VM
+  config.ssh.private_key_path = "~/.ssh/id_rsa"
+  config.ssh.forward_agent = true
 
   # Set the version of chef to install using the vagrant-omnibus plugin
   config.omnibus.chef_version = :latest
@@ -48,7 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # vb.gui = true
 
     # Name that appears in the VirtualBox GUI
-    vb.name = "haskell_vm"
+    vb.name = "haskell-vm"
     vb.memory = 512
     vb.cpus = 2
 
@@ -79,7 +94,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     }
 
     chef.run_list = [
-        "recipe[haskell::default]"
+        "recipe[haskell-dev::default]"
     ]
   end
 end
