@@ -19,6 +19,7 @@ git "clone haskell-redo" do
 end
 
 include_recipe "my-environment::permissions"
+include_recipe "my-environment::gui"
 
 # Backend
 

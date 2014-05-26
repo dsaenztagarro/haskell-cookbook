@@ -7,5 +7,3 @@ long_description 'Installs/Configures haskell'
 version          '0.1.0'
 
 depends "my-environment"
-
-# depends "haskell"
