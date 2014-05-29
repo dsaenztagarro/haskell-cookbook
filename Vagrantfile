@@ -48,7 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.provider :virtualbox do |vb|
     # Don't boot with headless mode
-    vb.gui = true
+    vb.gui = false
 
     # Name that appears in the VirtualBox GUI
     vb.name = "haskell-vm"
