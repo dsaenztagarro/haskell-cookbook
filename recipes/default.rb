@@ -36,6 +36,10 @@ end
 # Install recent versions of alex (the Haskell lexer generator) and happy (the
 # Haskell parser generator).
 execute "install_haskell_dev_tools" do
+  user "vagrant"
+  group "vagrant"
+  cwd "/home/vagrant"
+  environment ({'HOME' => '/home/vagrant', 'USER' => 'vagrant'})
   command <<-EOH
     cabal update
     cabal install -g cabal-install
