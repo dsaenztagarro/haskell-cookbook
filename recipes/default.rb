@@ -25,11 +25,26 @@ include_recipe "my-environment::gui"
 
 # Backend
 
+# ATENTION: Install process requires at least 4096mb RAM
+
 execute "install_haskell_platform" do
   command <<-EOH
     apt-get install haskell-platform -y
-    apt-get install hlint -y
-    apt-get install ghc-mod -y
+  EOH
+end
+
+# Install recent versions of alex (the Haskell lexer generator) and happy (the
+# Haskell parser generator).
+execute "install_haskell_dev_tools" do
+  command <<-EOH
+    cabal install -g cabal-install
+    cabal install -g alex
+    cabal install -g happy
+    cabal install -g haskell-src-exts
+    cabal install -g hlint
+    cabal install -g ghc-mod
+    cabal install -g hdevtools
+    cabal install -g pointfree
   EOH
 end
 
@@ -55,7 +70,3 @@ end
 
 # Inside project:
 # cabal sandbox init
-# cabal install hdevtools
-# cabal install hlint
-
-# apt-get install ubuntu-dev-tools
