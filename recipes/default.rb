@@ -21,15 +21,39 @@ git "clone haskell-redo" do
 end
 
 include_recipe "my-environment::permissions"
-include_recipe "my-environment::gui"
+# include_recipe "my-environment::gui"
 
 # Backend
 
 # ATENTION: Install process requires at least 4096mb RAM
 
+execute "install_opengl" do
+  command <<-EOH
+    sudo apt-get install libgl1-mesa-dev libglc-dev freeglut3-dev libedit-dev libglw1-mesa libglw1-mesa-dev -y
+  EOH
+end
+
+execute "install_ghc763" do
+  command <<-EOH
+    cd /tmp
+    aptitude install -y libgmp3c2 libgmp3-dev
+    ln -s /usr/lib/x86_64-linux-gnu/libgmp.so.10.0.5 /usr/lib/libgmp.so.3
+    wget https://www.haskell.org/ghc/dist/7.6.3/ghc-7.6.3-x86_64-unknown-linux.tar.bz2
+    tar xvf ghc-7.6.3-x86_64-unknown-linux.tar.bz2
+    cd ghc-7.6.3
+    ./configure
+    make install
+  EOH
+end
+
 execute "install_haskell_platform" do
   command <<-EOH
-    apt-get install haskell-platform -y
+    cd /tmp
+    wget http://lambda.haskell.org/platform/download/2013.2.0.0/haskell-platform-2013.2.0.0.tar.gz
+    tar xvf haskell-platform-2013.2.0.0.tar.gz
+    cd haskell-platform-2013.2.0.0
+    ./configure
+    make install
   EOH
 end
 
