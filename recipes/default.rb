@@ -37,6 +37,7 @@ end
 # Haskell parser generator).
 execute "install_haskell_dev_tools" do
   command <<-EOH
+    cabal update
     cabal install -g cabal-install
     cabal install -g alex
     cabal install -g happy
