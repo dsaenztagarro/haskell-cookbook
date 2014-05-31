@@ -53,10 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Name that appears in the VirtualBox GUI
     vb.name = "haskell-vm"
     vb.memory = 4096
-    vb.cpus = 2
-
-    # Use VBoxManage to customize the VM. For example to change memory:
-    # vb.customize ["modifyvm", :id, "--memory", "512"]
+    vb.cpus = 4
   end
   #
   # View the documentation for the provider you're using for more

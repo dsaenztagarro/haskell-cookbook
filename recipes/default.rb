@@ -83,19 +83,5 @@ execute "install_threadscope" do
   command "apt-get install threadscope -y"
 end
 
-
-# Install modern version of cabal with 'sandbox' command
-# execute "install_cabal" do
-#   command <<-EOH
-#     cd /tmp
-#     git clone https://github.com/haskell/cabal.git
-#     cd cabal
-#     git checkout Cabal-v1.18.1.2
-#     cabal update
-#     cabal install Cabal/ cabal-install/
-#     cabal install cabal-install
-#   EOH
-# end
-
 # Inside project:
 # cabal sandbox init
