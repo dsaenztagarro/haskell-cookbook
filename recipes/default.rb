@@ -21,7 +21,16 @@ git "clone haskell-redo" do
 end
 
 include_recipe "my-environment::permissions"
-# include_recipe "my-environment::gui"
+include_recipe "my-environment::gui"
+
+# Added cabal path
+cookbook_file 'copy_bashrc' do
+  path '/home/vagrant/.bashrc'
+  source 'bashrc'
+  owner 'vagrant'
+  group 'vagrant'
+  action :create
+end
 
 # Backend
 
